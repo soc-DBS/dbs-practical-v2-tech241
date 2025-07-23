@@ -98,10 +98,13 @@ model userRole {
 }
 
 model module {
-  modCode    Int     @id @map("mod_code")
+  modCode    String     @id @map("mod_code") @db.VarChar(10)
   modName    String  @map("mod_name") @db.VarChar(100)
   creditUnit Int     @map("credit_unit")
   modCoord   String? @map("mod_coord") @db.Char(4)
+
+  preRequisiteModCodeToModule preRequisite[] @relation("preRequisiteModCodeToModule")
+  preRequisiteRequisiteToModule preRequisite[] @relation("preRequisiteRequisiteToModule")
 
 }
 
@@ -122,6 +125,9 @@ model preRequisite {
 
   @@id([modCode, requisite])
   @@map("pre_requisite")
+
+  preRequisiteModCodeToModule module @relation("preRequisiteModCodeToModule", fields: [modCode], references: [modCode], onDelete: NoAction, onUpdate: NoAction, map: "pre_requisite_mod_code_fk")
+  preRequisiteRequisiteToModule module @relation("preRequisiteRequisiteToModule", fields: [requisite], references: [modCode], onDelete: NoAction, onUpdate: NoAction, map: "pre_requisite_requisite_fk")
 
 }
 
