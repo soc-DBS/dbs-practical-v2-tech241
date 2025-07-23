@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Transfer Form</title>
+    <link rel="stylesheet" href="transfer.css">
+</head>
+
+<body>
+    <!-- staff‑transfer.html -->
+    <form id="transferForm" class="transfer-form" autocomplete="off">
+        <fieldset>
+            <legend>Staff Transfer Form</legend>
+
+            <!-- Staff number -->
+            <label for="staffNo">Staff No.</label>
+            <select name="staffNo" id="staffNo" required>
+                <option value="" hidden selected>Select staff member…</option>
+                <option value="S001">S001 – HOD</option>
+                <option value="S020">S020 – Mod Coordinator</option>
+                <option value="S002">S002 – Supervisor</option>
+            </select>
+
+            <!-- Target department -->
+            <label for="department">New Department</label>
+            <select name="department" id="department" required>
+                <option value="" hidden selected>Select department…</option>
+                <option value="SOC">SOC – School of Computing</option>
+                <option value="SB">SB – School of Business</option>
+                <option value="PO">PO – Principal’s Office</option>
+                <option value="DPO">DPO – Deputy Principal’s Office</option>
+            </select>
+
+            <button type="submit" id="submitBtn">Transfer Staff</button>
+        </fieldset>
+    </form>
+
+
+    <script src="transfer.js" defer></script>
+</body>
+
+</html>
