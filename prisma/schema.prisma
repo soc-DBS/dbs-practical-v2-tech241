@@ -16,6 +16,8 @@ model course {
 
 // course is the owner side of the relation with department. Hence. Foreign key lives in owning side of the relation.
   DepartmentCodeToCourse department @relation("DepartmentCodeToCourse", fields: [offeredBy], references: [deptCode], onDelete: NoAction, onUpdate: NoAction, map: "course_offered_by_fk")
+
+  StudentCourseCodeToCourse student[] @relation("StudentCourseCodeToCourse")
   
 }
 
@@ -135,6 +137,8 @@ model country {
   countryName String @id @map("country_name") @db.VarChar(30)
   language    String @map("language") @db.VarChar(30)
   region      String @map("region") @db.VarChar(30)
+
+  StudentNationalityToCountry student[] @relation("StudentNationalityToCountry")
 }
 
 model student {
@@ -147,6 +151,9 @@ model student {
   dob         DateTime @map("dob") @db.Date
   nationality String   @map("nationality") @db.VarChar(30)
   courseCode  String   @map("crse_code") @db.VarChar(5)
+
+  StudentCourseCodeToCourse course @relation("StudentCourseCodeToCourse", fields: [courseCode], references: [crseCode], onDelete: NoAction, onUpdate: NoAction, map: "student_crse_code_fk")
+  StudentNationalityToCountry country @relation("StudentNationalityToCountry", fields: [nationality], references: [countryName], onDelete: NoAction, onUpdate: NoAction, map: "student_nationality_fk")
 }
 
 model studentModPerformance {
