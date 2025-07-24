@@ -107,6 +107,7 @@ model module {
 
   preRequisiteModCodeToModule preRequisite[] @relation("preRequisiteModCodeToModule")
   preRequisiteRequisiteToModule preRequisite[] @relation("preRequisiteRequisiteToModule")
+  StudentModPerformanceToModule studentModPerformance[] @relation("StudentModPerformanceToModule")
 
 }
 
@@ -154,6 +155,7 @@ model student {
 
   StudentCourseCodeToCourse course @relation("StudentCourseCodeToCourse", fields: [courseCode], references: [crseCode], onDelete: NoAction, onUpdate: NoAction, map: "student_crse_code_fk")
   StudentNationalityToCountry country @relation("StudentNationalityToCountry", fields: [nationality], references: [countryName], onDelete: NoAction, onUpdate: NoAction, map: "student_nationality_fk")
+  StudentModPerformanceToStudent studentModPerformance[] @relation("StudentModPerformanceToStudent")
 }
 
 model studentModPerformance {
@@ -161,6 +163,9 @@ model studentModPerformance {
   modRegistered String @map("mod_registered") @db.VarChar(10)
   mark          Int    @map("mark")
   grade         String @map("grade") @db.Char(2)
+
+  StudentModPerformanceToStudent student @relation("StudentModPerformanceToStudent", fields: [adminNo], references: [adminNo], onDelete: NoAction, onUpdate: NoAction, map: "student_mod_performance_admin_no_fk")
+  StudentModPerformanceToModule module @relation("StudentModPerformanceToModule", fields: [modRegistered], references: [modCode], onDelete: NoAction, onUpdate: NoAction, map: "student_mod_performance_mod_registered_fk")
 
   @@id([adminNo, modRegistered])
   @@map("student_mod_performance")
